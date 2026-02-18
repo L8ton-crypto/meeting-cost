@@ -8,7 +8,7 @@ interface MeetingState {
   duration: number
   attendees: number
   hourlyRate: number
-  currency: '£' | '$'
+  currency: '£' | '$' | '€'
 }
 
 interface MeetingRecord {
@@ -241,11 +241,11 @@ export default function MeetingCostCalculator() {
             <div className="flex items-center justify-between mb-5">
               <h3 className="text-lg font-bold">Meeting Setup</h3>
               <button
-                onClick={() => setMeeting(prev => ({ ...prev, currency: prev.currency === '£' ? '$' : '£' }))}
+                onClick={() => setMeeting(prev => ({ ...prev, currency: prev.currency === '£' ? '$' : prev.currency === '$' ? '€' : '£' }))}
                 className="flex items-center gap-1 bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-lg text-sm transition-all"
               >
                 {c === '£' ? <PoundSterling className="w-4 h-4" /> : <DollarSign className="w-4 h-4" />}
-                <span>{c === '£' ? 'GBP' : 'USD'}</span>
+                <span>{c === '£' ? 'GBP' : c === '$' ? 'USD' : 'EUR'}</span>
               </button>
             </div>
 
@@ -319,11 +319,11 @@ export default function MeetingCostCalculator() {
             <div className="text-gray-400 text-xs">Per Hour</div>
           </div>
           <div className="bg-white/5 rounded-xl p-4 text-center">
-            <div className="text-xl font-bold">{c}{costPerMinute.toFixed(0)}</div>
+            <div className="text-xl font-bold">{c}{costPerMinute.toFixed(2)}</div>
             <div className="text-gray-400 text-xs">Per Minute</div>
           </div>
           <div className="bg-white/5 rounded-xl p-4 text-center">
-            <div className="text-xl font-bold">{c}{(meeting.attendees * meeting.hourlyRate).toFixed(0)}</div>
+            <div className="text-xl font-bold">{c}{(meeting.attendees * meeting.hourlyRate).toFixed(2)}</div>
             <div className="text-gray-400 text-xs">Per Hour (all)</div>
           </div>
         </div>
