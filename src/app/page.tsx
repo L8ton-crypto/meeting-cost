@@ -244,7 +244,7 @@ export default function MeetingCostCalculator() {
                 onClick={() => setMeeting(prev => ({ ...prev, currency: prev.currency === '£' ? '$' : prev.currency === '$' ? '€' : '£' }))}
                 className="flex items-center gap-1 bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-lg text-sm transition-all"
               >
-                {c === '£' ? <PoundSterling className="w-4 h-4" /> : <DollarSign className="w-4 h-4" />}
+                {c === '£' ? <PoundSterling className="w-4 h-4" /> : c === '€' ? <span className="w-4 h-4 font-bold text-sm leading-4">€</span> : <DollarSign className="w-4 h-4" />}
                 <span>{c === '£' ? 'GBP' : c === '$' ? 'USD' : 'EUR'}</span>
               </button>
             </div>
@@ -277,7 +277,7 @@ export default function MeetingCostCalculator() {
 
               <div>
                 <label className="flex items-center gap-2 text-sm text-gray-300 mb-2">
-                  {c === '£' ? <PoundSterling className="w-4 h-4" /> : <DollarSign className="w-4 h-4" />}
+                  {c === '£' ? <PoundSterling className="w-4 h-4" /> : c === '€' ? <span className="w-4 h-4 font-bold text-sm leading-4">€</span> : <DollarSign className="w-4 h-4" />}
                   Avg Hourly Rate
                 </label>
                 <div className="flex gap-2 flex-wrap">
