@@ -135,6 +135,7 @@ export default function MeetingCostCalculator() {
       const updated = [record, ...history].slice(0, 50)
       setHistory(updated)
       saveHistory(updated)
+      setShowHistory(true)
     }
     setMeeting(prev => ({ ...prev, isRunning: false, duration: 0 }))
   }, [meeting, cost, history])
